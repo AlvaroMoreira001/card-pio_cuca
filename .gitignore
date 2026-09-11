@@ -1,0 +1,21 @@
+# Dependências e build da Vercel
+node_modules/
+.vercel/
+
+# Variáveis de ambiente e config gerada (contém dados sensíveis, ex: WhatsApp real)
+.env
+.env.local
+config.js
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Artefatos do editor de design (Claude Design) usados só para prototipar
+# visualmente — não fazem parte do site publicado.
+/Cardapio Cuca.dc.html
+/.thumbnail
+/_ds/
+/image-slot.js
+/support.js
+/uploads/
