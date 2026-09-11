@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3f2f2">
+<title>Cuca Espetinhos &amp; Lanches — Cardápio digital</title>
+<meta name="description" content="Cardápio digital da Cuca Espetinhos & Lanches. Monte seu pedido de espetos, lanches, porções e bebidas e envie pelo WhatsApp.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
+<!-- Região usada para anunciar mudanças (item adicionado, quantidade, etc.) a leitores de tela -->
+<div id="sr-announcer" class="visually-hidden" role="status" aria-live="polite"></div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f3f2f2" stroke-width="2" stroke-linecap="round"><path d="M4 20 20 4"></path><circle cx="9" cy="15" r="2.1"></circle><circle cx="13" cy="11" r="2.1"></circle></svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">CUCA</span>
+        <span class="brand-sub">Espetinhos &amp; Lanches</span>
+      </span>
+    </div>
+
+    <p id="open-status" class="tag tag-accent status-tag"></p>
+
+    <button type="button" id="open-cart-header" class="btn btn-secondary cart-btn" aria-haspopup="dialog" aria-controls="cart-dialog">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h2.2l2.4 12.2a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 7H5"></path></svg>
+      <span id="cart-btn-label">Pedido</span>
+    </button>
+  </div>
+</header>
+
+<main id="main-content" tabindex="-1">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-panel">
+        <p class="hero-kicker">Na brasa, feito na hora</p>
+        <h1 id="hero-title">Espetinho<br>da Cuca</h1>
+      </div>
+      <ul class="info-list">
+        <li>Entrega 30–45 min</li>
+        <li>Taxa R$ 3,00 a R$ 8,00</li>
+        <li>Pedido mínimo R$ 20,00</li>
+        <li>Retirada no balcão</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="tabs-bar">
+    <div class="wrap">
+      <div id="category-tabs" class="tabs-scroll" role="tablist" aria-label="Categorias do cardápio">
+        <!-- tabs geradas via JS -->
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap search-wrap">
+    <label for="search-input" class="visually-hidden">Buscar no cardápio</label>
+    <div class="search-field">
+      <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.2-3.2"></path></svg>
+      <input class="input" id="search-input" type="search" placeholder="Buscar espeto, lanche, porção…" autocomplete="off">
+    </div>
+  </div>
+
+  <section class="wrap menu-section" aria-label="Itens do cardápio">
+    <h2 id="section-title" class="section-title"></h2>
+    <div class="hr" role="presentation"></div>
+
+    <p id="no-results" class="no-results" role="status" hidden>Nada encontrado por aqui. Tenta outro nome.</p>
+
+    <ul id="menu-list" class="menu-list" aria-labelledby="section-title">
+      <!-- itens gerados via JS -->
+    </ul>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <h2>Horário</h2>
+        <p>Terça a domingo, 18h às 23h30<br>Segunda fechado</p>
+      </div>
+      <div>
+        <h2>Onde estamos</h2>
+        <p>Rua Exemplo, 000 — Centro<br>Pedidos pelo WhatsApp</p>
+      </div>
+      <div>
+        <h2>Pagamento</h2>
+        <p>Pix, dinheiro, débito e crédito<br>Maquininha na entrega</p>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<div id="cart-bar" class="cart-bar" hidden>
+  <div class="wrap">
+    <button type="button" id="open-cart-bar" class="cart-bar-btn" aria-haspopup="dialog" aria-controls="cart-dialog">
+      <span class="cart-bar-count" id="cart-bar-count" aria-hidden="true">0</span>
+      <span class="cart-bar-text">Ver meu pedido</span>
+      <span id="cart-bar-total"></span>
+    </button>
+  </div>
+</div>
+
+<!-- Modal de item -->
+<div id="item-dialog-backdrop" class="dialog-backdrop item-dialog-backdrop" hidden>
+  <div id="item-dialog" class="dialog item-dialog" role="dialog" aria-modal="true" aria-labelledby="item-dialog-title">
+    <button type="button" class="btn dialog-close" id="item-dialog-close" aria-label="Fechar detalhes do item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"></path></svg>
+    </button>
+
+    <div class="item-dialog-scroll">
+      <h2 id="item-dialog-title"></h2>
+      <p id="item-dialog-desc"></p>
+      <p class="price" id="item-dialog-price"></p>
+
+      <p id="item-closed-notice" class="closed-notice" role="status" hidden>A loja está fechada agora. Pedidos abrem às 18h.</p>
+
+      <fieldset id="item-addons-fieldset" class="addons-fieldset" hidden>
+        <legend>Adicionais <span class="legend-note">(opcional)</span></legend>
+        <div id="item-addons-list" class="addons-list"></div>
+      </fieldset>
+
+      <div class="field item-note-field">
+        <label for="item-note">Alguma observação? (ex: bem passado, sem cebola)</label>
+        <textarea class="input" id="item-note" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="item-dialog-footer">
+      <div class="stepper">
+        <button type="button" class="btn stepper-btn" id="item-qty-dec" aria-label="Diminuir quantidade">−</button>
+        <span id="item-qty" class="stepper-value" aria-live="polite">1</span>
+        <button type="button" class="btn stepper-btn" id="item-qty-inc" aria-label="Aumentar quantidade">+</button>
+      </div>
+      <button type="button" class="btn btn-primary item-add-btn" id="item-add-to-cart">
+        <span>Adicionar ao pedido</span>
+        <span id="item-total-label"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal do carrinho -->
+<div id="cart-dialog-backdrop" class="dialog-backdrop cart-dialog-backdrop" hidden>
+  <div id="cart-dialog" class="dialog cart-dialog" role="dialog" aria-modal="true" aria-labelledby="cart-dialog-title">
+    <div class="cart-dialog-head">
+      <h2 id="cart-dialog-title">Meu pedido</h2>
+      <button type="button" class="btn dialog-close" id="cart-dialog-close" aria-label="Fechar meu pedido">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"></path></svg>
+      </button>
+    </div>
+
+    <div class="cart-dialog-scroll">
+      <p id="cart-closed-notice" class="closed-notice" role="status" hidden>A loja está fechada agora. Não é possível enviar pedidos — pedidos abrem às 18h.</p>
+
+      <p id="cart-empty" class="cart-empty">Seu pedido está vazio.<br>Escolhe um espetinho pra começar.</p>
+
+      <ul id="cart-lines" class="cart-lines"></ul>
+
+      <div id="cart-details" hidden>
+        <fieldset class="fieldset-plain">
+          <legend>Como você quer receber</legend>
+          <div class="seg" id="mode-seg">
+            <label class="seg-opt">
+              <input type="radio" name="mode" id="mode-entrega" value="entrega" checked>Entrega
+            </label>
+            <label class="seg-opt">
+              <input type="radio" name="mode" id="mode-retirada" value="retirada">Retirada
+            </label>
+          </div>
+        </fieldset>
+
+        <div id="delivery-fields" class="delivery-fields">
+          <div class="field">
+            <label for="bairro-select">Bairro</label>
+            <select class="input" id="bairro-select"></select>
+          </div>
+          <div class="field">
+            <label for="address-input">Endereço e número</label>
+            <input class="input" type="text" id="address-input" placeholder="Rua, número, complemento" autocomplete="street-address">
+          </div>
+        </div>
+
+        <div class="field customer-field">
+          <label for="customer-input">Seu nome <span aria-hidden="true">*</span><span class="visually-hidden"> (obrigatório)</span></label>
+          <input class="input" type="text" id="customer-input" placeholder="Como te chamamos?" autocomplete="name" required aria-required="true" aria-describedby="customer-error">
+          <p id="customer-error" class="field-error" role="alert" hidden>Informe seu nome para continuar.</p>
+        </div>
+
+        <fieldset class="fieldset-plain payment-fieldset">
+          <legend>Pagamento</legend>
+          <div id="payment-options" class="payment-options"></div>
+        </fieldset>
+
+        <div class="hr" role="presentation"></div>
+        <dl class="totals">
+          <div class="totals-row"><dt>Subtotal</dt><dd id="subtotal-value"></dd></div>
+          <div class="totals-row"><dt id="fee-label"></dt><dd id="fee-value"></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div id="cart-dialog-footer" class="cart-dialog-footer" hidden>
+      <div class="grand-total">
+        <span>Total</span>
+        <span id="total-value"></span>
+      </div>
+      <a class="btn btn-primary btn-block whatsapp-btn" id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer">
+        <span>Enviar pedido no WhatsApp</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.1 14.9l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4zm-3.3 4c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.7 2.8 4.3 3.8 2.1.8 2.6.7 3 .6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.5-.3l-1.7-.8c-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5s0-.3-.1-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4z"></path></svg>
+        <span class="visually-hidden">(abre em nova aba)</span>
+      </a>
+      <p class="whatsapp-note">O pedido chega pronto no WhatsApp da loja. É só confirmar.</p>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
